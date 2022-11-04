@@ -23,7 +23,7 @@ public class DDSI_seminario1 {
 
     //Nombre usuario y password
     static String usuario = "x";
-    static String password = "x";
+    static String password = "y";
     public static void main(String[] args) {
         // TODO code application logic here
         Properties properties = new Properties();
