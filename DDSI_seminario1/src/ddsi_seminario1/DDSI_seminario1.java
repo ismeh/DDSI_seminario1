@@ -17,10 +17,6 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-/**
- *
- * @author Ismael
- */
 public class DDSI_seminario1 {
 
     static String url = "jdbc:oracle:thin:@//oracle0.ugr.es:1521/practbd.oracle0.ugr.es";
