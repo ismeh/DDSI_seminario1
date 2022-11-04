@@ -5,11 +5,17 @@
  */
 package ddsi_seminario1;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.Properties;
 
 /**
  *
@@ -24,6 +30,20 @@ public class DDSI_seminario1 {
     static String password = "x";
     public static void main(String[] args) {
         // TODO code application logic here
+        Properties properties = new Properties();
+        try {
+            Path path = Paths.get("passwd.properties");
+            String util = path.toAbsolutePath().toString();
+            properties.load(new FileInputStream(util));
+            usuario = properties.get("db.user").toString();
+            password = properties.get("db.passwd").toString();
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
