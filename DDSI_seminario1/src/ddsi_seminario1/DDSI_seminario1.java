@@ -37,7 +37,6 @@ public class DDSI_seminario1 {
             properties.load(new FileInputStream(util));
             usuario = properties.get("db.user").toString();
             password = properties.get("db.passwd").toString();
-
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
