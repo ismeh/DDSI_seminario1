@@ -44,11 +44,32 @@ public class DDSI_seminario1 {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection(url,usuario,password);
             System.out.println("Ha entrado");
+
+
+
+
+            SacaInfo(conexion);
             conexion.close();
+
+
+
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
         }
 
     }
 
+    static void  SacaInfo(Connection conexion) throws SQLException {
+        DatabaseMetaData metaDatos = conexion.getMetaData();
+        ResultSet rs= metaDatos.getColumns(null,null,"STOCK",null);
+
+        while (rs.next()){
+            String nombreColumna  = rs.getString(4);
+            String tipoColumna = rs.getString(6);
+
+            System.out.println("Columna: " + nombreColumna + " tipo: " + tipoColumna);
+        }
+    }
 }
+
+
