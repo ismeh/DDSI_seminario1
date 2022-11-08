@@ -66,7 +66,7 @@ public class DDSI_seminario1 {
     }
 
     static void eligeOpcion() {
-        int numero=0;
+        char numero=0;
         while (numero != 4) {
             System.out.println("\t(1) Borrado y nueva creación de las tablas e inserción de 10 " +
                     "tuplas predefinidas en el código en la tabla Stock.");
@@ -77,20 +77,21 @@ public class DDSI_seminario1 {
 
             Scanner scanner = new Scanner(System.in);
             System.out.println("Elija una opción:");
-            numero = scanner.nextInt();
+            numero = scanner.next().charAt(0);
 
             switch (numero) {
-                case 1:
+                case '1':
                     break;
-                case 2:
+                case '2':
                     break;
-                case 3:
+                case '3':
                     break;
-                case 4:
+                case '4':
                     break;
                 default:
-                    System.out.println(ANSI_RED + "El número introducido no " +
-                            "es correcto");
+                    System.out.println(ANSI_RED + "La tecla introducida no corresponde con ninguna opción válida. " +
+                            "Por favor, seleccione una de las teclas que se muestran por pantalla. Tenga en cuenta" +
+                            " que sólo se seleccionará la primera letra de la cadena que introduzca.");
                     System.out.println(ANSI_RESET);
                     break;
             }
@@ -98,7 +99,6 @@ public class DDSI_seminario1 {
 //                if (numero ==1 || numero == 2 || numero == 3)
             //mostrar contenido bd
         }
-
     }
 }
 

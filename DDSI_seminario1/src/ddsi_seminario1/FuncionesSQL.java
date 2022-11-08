@@ -19,6 +19,4 @@ public class FuncionesSQL {
             System.out.println("Columna: " + nombreColumna + " tipo: " + tipoColumna);
         }
     }
-
-
 }
