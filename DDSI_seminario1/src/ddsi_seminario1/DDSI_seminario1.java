@@ -66,8 +66,8 @@ public class DDSI_seminario1 {
     }
 
     static void eligeOpcion() {
-        char numero=0;
-        while (numero != 4) {
+        char numero='0';
+        while (numero != '4') {
             System.out.println("\t(1) Borrado y nueva creación de las tablas e inserción de 10 " +
                     "tuplas predefinidas en el código en la tabla Stock.");
 
