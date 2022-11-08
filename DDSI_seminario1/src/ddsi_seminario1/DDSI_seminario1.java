@@ -16,12 +16,15 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.Properties;
+import java.util.Scanner;
 
 
 public class DDSI_seminario1 {
 
     static String url = "jdbc:oracle:thin:@//oracle0.ugr.es:1521/practbd.oracle0.ugr.es";
 
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
     //Nombre usuario y password
     static String usuario = "x";
     static String password = "y";
@@ -44,12 +47,13 @@ public class DDSI_seminario1 {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection(url,usuario,password);
-            System.out.println("Ha entrado");
 
             FuncionesSQL funcionesSQL = new FuncionesSQL();
 
-            funcionesSQL.SacaInfo(conexion);
+            int numero=1;
+            System.out.println("Bienvenido a SQL elija una opción para realizar:");
 
+            eligeOpcion();
 
             conexion.close();
 
@@ -61,7 +65,41 @@ public class DDSI_seminario1 {
 
     }
 
+    static void eligeOpcion() {
+        int numero=0;
+        while (numero != 4) {
+            System.out.println("\t(1) Borrado y nueva creación de las tablas e inserción de 10 " +
+                    "tuplas predefinidas en el código en la tabla Stock.");
 
+            System.out.println("\t(2) Dar de alta nuevo pedido");
+            System.out.println("\t(3) Mostrar contenido de las tablas de la BD");
+            System.out.println("\t(4) Salir del programa y cerrar conexión a BD");
+
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Elija una opción:");
+            numero = scanner.nextInt();
+
+            switch (numero) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                default:
+                    System.out.println(ANSI_RED + "El número introducido no " +
+                            "es correcto");
+                    System.out.println(ANSI_RESET);
+                    break;
+            }
+
+//                if (numero ==1 || numero == 2 || numero == 3)
+            //mostrar contenido bd
+        }
+
+    }
 }
 
 
