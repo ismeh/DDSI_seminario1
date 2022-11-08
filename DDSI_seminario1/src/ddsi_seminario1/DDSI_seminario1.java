@@ -17,6 +17,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.Properties;
 
+
 public class DDSI_seminario1 {
 
     static String url = "jdbc:oracle:thin:@//oracle0.ugr.es:1521/practbd.oracle0.ugr.es";
@@ -45,10 +46,11 @@ public class DDSI_seminario1 {
             Connection  conexion = DriverManager.getConnection(url,usuario,password);
             System.out.println("Ha entrado");
 
+            FuncionesSQL funcionesSQL = new FuncionesSQL();
+
+            funcionesSQL.SacaInfo(conexion);
 
 
-
-            SacaInfo(conexion);
             conexion.close();
 
 
@@ -59,17 +61,7 @@ public class DDSI_seminario1 {
 
     }
 
-    static void  SacaInfo(Connection conexion) throws SQLException {
-        DatabaseMetaData metaDatos = conexion.getMetaData();
-        ResultSet rs= metaDatos.getColumns(null,null,"STOCK",null);
 
-        while (rs.next()){
-            String nombreColumna  = rs.getString(4);
-            String tipoColumna = rs.getString(6);
-
-            System.out.println("Columna: " + nombreColumna + " tipo: " + tipoColumna);
-        }
-    }
 }
 
 
