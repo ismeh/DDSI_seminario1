@@ -45,9 +45,9 @@ public class DDSI_seminario1 {
 
         conexionBD conexion = new conexionBD(url,usuario,password);
 
-            FuncionesSQL funcionesSQL = new FuncionesSQL();
+            //FuncionesSQL funcionesSQL = new FuncionesSQL();
 
-            int numero=1;
+            //int numero=1;
             System.out.println("Bienvenido a SQL elija una opción para realizar:");
 
             eligeOpcion();
