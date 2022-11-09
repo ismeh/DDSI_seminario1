@@ -28,8 +28,8 @@ public class DDSI_seminario1 {
     //Nombre usuario y password
     static String usuario = "x";
     static String password = "y";
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) throws SQLException {
+        //
         Properties properties = new Properties();
         try {
             Path path = Paths.get("passwd.properties");
@@ -43,9 +43,7 @@ public class DDSI_seminario1 {
             throw new RuntimeException(e);
         }
 
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection  conexion = DriverManager.getConnection(url,usuario,password);
+        conexionBD conexion = new conexionBD(url,usuario,password);
 
             FuncionesSQL funcionesSQL = new FuncionesSQL();
 

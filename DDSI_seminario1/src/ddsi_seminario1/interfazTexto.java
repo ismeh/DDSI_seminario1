@@ -7,10 +7,16 @@ import static ddsi_seminario1.DDSI_seminario1.ANSI_RED;
 import static ddsi_seminario1.DDSI_seminario1.ANSI_RESET;
 import static ddsi_seminario1.FuncionesSQL.addPedido;
 import static ddsi_seminario1.FuncionesSQL.consultaTabla;
+import static ddsi_seminario1.FuncionesSQL.borradoYCreacion;
 
 public class interfazTexto {
 
-    static void eligeOpcion(Connection conexion) {
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
+    static void eligeOpcion() throws SQLException {
+        System.out.println("Bienvenido a SQL elija una opción para realizar:");
+
         char numero='0';
         while (numero != '4') {
             System.out.println("\t(1) Borrado y nueva creación de las tablas e inserción de 10 " +
@@ -26,6 +32,7 @@ public class interfazTexto {
 
             switch (numero) {
                 case '1':
+                    borradoYCreacion();
                     break;
                 case '2':
                     interfazAltaPedido();
