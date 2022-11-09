@@ -24,8 +24,11 @@ public class FuncionesSQL {
         int codPedido = 0;
         //Gestión de codPedido
 
+
         //Insertar datos en la tabla
         
         return codPedido;
     }
+
+
 }

@@ -2,13 +2,17 @@ package ddsi_seminario1;
 
 import java.util.Scanner;
 
-import static ddsi_seminario1.DDSI_seminario1.ANSI_RED;
-import static ddsi_seminario1.DDSI_seminario1.ANSI_RESET;
+
 import static ddsi_seminario1.FuncionesSQL.addPedido;
 
 public class interfazTexto {
 
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
     static void eligeOpcion() {
+        System.out.println("Bienvenido a SQL elija una opción para realizar:");
+
         char numero='0';
         while (numero != '4') {
             System.out.println("\t(1) Borrado y nueva creación de las tablas e inserción de 10 " +
@@ -48,7 +52,7 @@ public class interfazTexto {
 
     static void interfazAltaPedido(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ha elegido dar de alta un nuevo pedido");
+        System.out.println("\n\nHa elegido dar de alta un nuevo pedido");
 
         String fechaPedido;
         int codCliente, codPedido;
@@ -60,7 +64,7 @@ public class interfazTexto {
 
         codPedido = addPedido(codCliente,fechaPedido);
 
-        System.out.println("Opciones:");
+        System.out.println("\nOpciones:");
         System.out.println("\t(1) Añadir detalles del producto");
         System.out.println("\t(2) Eliminar detalles del producto");
         System.out.println("\t(3) Cancelar pedido");
