@@ -6,7 +6,9 @@ public class FuncionesSQL {
 
 
     private static int contadorPedidos = 0;
-
+    private static String STOCK = "STOCK";
+    private static String PEDIDOS = "PEDIDOS";
+    private static String DETALLEPEDIDOS= "DETALLEPEDIDOS";
 
     static void borradoYCreacion() throws SQLException {
         Connection conexion = conexionBD.getConexion();
@@ -14,26 +16,18 @@ public class FuncionesSQL {
         creacion(conexion);
     }
     static void borrado(Connection conexion) throws SQLException {
-
-
         DatabaseMetaData metaDatos = conexion.getMetaData();
-        String tablaStock = "STOCK";
-        String tablaPedido = "PEDIDOS"; // PEDIDOS CON S PQ PEDIDO "EXISTE" SEGUN RSDATOS
-        String tablaDetallePedido = "DETALLEPEDIDOS";
 
-        ResultSet rsDetallePedido = metaDatos.getTables(null, null, tablaDetallePedido, null);
+        ResultSet rsDetallePedido = metaDatos.getTables(null, null, DETALLEPEDIDOS, null);
         if (rsDetallePedido.next())
-            eliminaTabla(conexion, tablaDetallePedido);
-        ResultSet rsStock = metaDatos.getTables(null, null, tablaStock, null);
+            eliminaTabla(conexion, DETALLEPEDIDOS);
+        ResultSet rsStock = metaDatos.getTables(null, null, STOCK, null);
         if (rsStock.next())
-            eliminaTabla(conexion, tablaStock);
+            eliminaTabla(conexion, STOCK);
 
-        ResultSet rsPedido = metaDatos.getTables(null, null, tablaPedido, null);
+        ResultSet rsPedido = metaDatos.getTables(null, null, PEDIDOS, null);
         if (rsPedido.next())
-            eliminaTabla(conexion, tablaPedido);
-
-
-
+            eliminaTabla(conexion, PEDIDOS);
     }
 
     static void eliminaTabla(Connection conexion, String nombreTabla) throws SQLException {
@@ -47,16 +41,18 @@ public class FuncionesSQL {
 
 
     static void creacion(Connection conexion) throws SQLException {
-        String creacionTablaStock= "CREATE TABLE STOCK (Cproducto int PRIMARY KEY NOT NULL,"+
+        String creacionTablaStock= "CREATE TABLE " + STOCK + " (Cproducto int PRIMARY KEY NOT NULL,"+
                                     " Cantidad int)";
-        String creacionTablaPedidos = "CREATE TABLE PEDIDOS (CPedido int PRIMARY KEY NOT NULL," +
+        String creacionTablaPedidos = "CREATE TABLE " + PEDIDOS +" (CPedido int PRIMARY KEY NOT NULL," +
                                     "Ccliente int, FechaPedido DATE)";
-        String creacionTablaDetallePedidos = "CREATE TABLE DETALLEPEDIDOS (CPedido int," +
+        String creacionTablaDetallePedidos = "CREATE TABLE "+  DETALLEPEDIDOS+" (CPedido int," +
                 "Cproducto int, Cantidad int, PRIMARY KEY (Cpedido,CProducto), FOREIGN KEY (CProducto) "+
                 "REFERENCES STOCK(Cproducto), FOREIGN KEY (CPedido) REFERENCES PEDIDOS(Cpedido)) ";
         crearTabla(conexion, creacionTablaStock);
         crearTabla(conexion, creacionTablaPedidos);
         crearTabla(conexion, creacionTablaDetallePedidos);
+
+        addAllStock();
 
     }
     static void crearTabla(Connection conexion, String creacionTabla) throws SQLException {
@@ -72,7 +68,7 @@ public class FuncionesSQL {
 
         //Insertar datos en la tabla
         PreparedStatement stmt = null;
-        stmt =  conexionBD.getConexion().prepareStatement("INSERT INTO PEDIDOS VALUES (?,?,?)");
+        stmt =  conexionBD.getConexion().prepareStatement("INSERT INTO "+ PEDIDOS +" VALUES (?,?,?)");
         stmt.setInt(1,codPedido);
         stmt.setInt(2,codCliente);
         stmt.setString(3,fechaPedido);
@@ -81,5 +77,31 @@ public class FuncionesSQL {
         return codPedido;
     }
 
+    public static void addStock(int Cproducto, int cantidad) throws SQLException {
 
+        //Insertar datos en la tabla
+        PreparedStatement stmt = null;
+        stmt =  conexionBD.getConexion().prepareStatement("INSERT INTO " + STOCK +" VALUES (?,?)");
+        stmt.setInt(1,Cproducto);
+        stmt.setInt(2,cantidad);
+        stmt.executeUpdate();
+        stmt.close();
+
+    }
+
+
+    static void addAllStock() throws SQLException {
+        addStock(1,10);
+        addStock(2,10);
+        addStock(3,10);
+        addStock(4,10);
+        addStock(5,15);
+
+        addStock(6,20);
+        addStock(7,20);
+        addStock(8,20);
+        addStock(9,20);
+        addStock(10,15);
+
+    }
 }
