@@ -66,9 +66,7 @@ public class FuncionesSQL {
         stmt.close();
     }
 
-
-
-    public static int addPedido(int codCliente, String fechaPedido){
+    public static int addPedido(int codCliente, String fechaPedido) throws SQLException {
         int codPedido = 0;
         //Gestión de codPedido
 

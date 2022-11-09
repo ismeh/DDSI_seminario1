@@ -50,13 +50,9 @@ public class DDSI_seminario1 {
             int numero=1;
             System.out.println("Bienvenido a SQL elija una opción para realizar:");
 
-            eligeOpcion(conexion);
+            eligeOpcion();
 
-            conexion.close();
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-        }
+            conexionBD.cerrarConexion();
     }
 }
 

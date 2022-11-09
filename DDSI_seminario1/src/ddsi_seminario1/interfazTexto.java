@@ -1,6 +1,7 @@
 package ddsi_seminario1;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import static ddsi_seminario1.DDSI_seminario1.ANSI_RED;
@@ -39,7 +40,7 @@ public class interfazTexto {
                     break;
                 case '3':
                     String tabla = interfazElijaTabla();
-                    consultaTabla(conexion, tabla);
+                    consultaTabla(conexionBD.getConexion(), tabla);
                     break;
                 case '4':
                     conexionBD.cerrarConexion();
@@ -58,7 +59,7 @@ public class interfazTexto {
 
     }
 
-    static void interfazAltaPedido(){
+    static void interfazAltaPedido() throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\n\nHa elegido dar de alta un nuevo pedido");
 
