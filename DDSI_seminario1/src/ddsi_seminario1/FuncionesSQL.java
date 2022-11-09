@@ -77,7 +77,7 @@ public class FuncionesSQL {
         stmt.setInt(2,codCliente);
         stmt.setString(3,fechaPedido);
         stmt.executeUpdate();
-
+        stmt.close();
         return codPedido;
     }
 
