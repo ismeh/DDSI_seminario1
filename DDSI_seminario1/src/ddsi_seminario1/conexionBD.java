@@ -20,10 +20,7 @@ public class conexionBD {
         }
     }
 
-    static public Connection getConexion(String url, String usuario, String password) {
-        if (conexion == null)
-            iniciarConexion(url,usuario,password);
-
+    static public Connection getConexion() {
         return conexion;
     }
 
