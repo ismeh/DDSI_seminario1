@@ -1,9 +1,10 @@
 package ddsi_seminario1;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.sun.tools.javac.Main;
+
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FuncionesSQL {
     private static int contadorPedidos = 0;
@@ -27,5 +28,47 @@ public class FuncionesSQL {
         //Insertar datos en la tabla
         
         return codPedido;
+    }
+
+    protected static void consultaTabla(Connection conexion, String tabla){
+        ResultSet r = buscar("select * from " + tabla, conexion);
+
+        try{
+            System.out.println("\nTODOS LOS REGISTROS DE LA TABLA " + tabla);
+
+            while(r.next()){
+                switch (tabla){
+                    case "STOCK":
+                        System.out.println("\n" + r.getInt("Cproducto") + " | " + r.getInt("Cantidad"));
+                        break;
+
+                    case "PEDIDOS":
+                        System.out.println("\n" + r.getInt("Cpedido") + " | " + r.getInt("Ccliente") + "\n" +
+                                r.getDate("Fecha-pedido"));
+                        break;
+
+                    case "DETALLE-PEDIDO":
+                        System.out.println("\n" + r.getInt("Cpedido") + " | " + r.getInt("Cproducto") + "\n" +
+                                r.getInt("Cantidad"));
+                        break;
+
+                    default:
+                        System.out.println("Error en el nombre de la tabla.");
+                        break;
+                }
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    protected static ResultSet buscar(String sql, Connection conexion){
+        try{
+            Statement stm = conexion.createStatement();
+            return stm.executeQuery(sql);
+        }catch(SQLException ex){
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

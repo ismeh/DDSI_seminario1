@@ -19,7 +19,6 @@ import java.util.Scanner;
 import static ddsi_seminario1.FuncionesSQL.addPedido;
 import static ddsi_seminario1.interfazTexto.eligeOpcion;
 
-
 public class DDSI_seminario1 {
 
     static String url = "jdbc:oracle:thin:@//oracle0.ugr.es:1521/practbd.oracle0.ugr.es";
@@ -44,7 +43,6 @@ public class DDSI_seminario1 {
             throw new RuntimeException(e);
         }
 
-
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection  conexion = DriverManager.getConnection(url,usuario,password);
@@ -54,16 +52,14 @@ public class DDSI_seminario1 {
             int numero=1;
             System.out.println("Bienvenido a SQL elija una opción para realizar:");
 
-            eligeOpcion();
+            eligeOpcion(conexion);
 
             conexion.close();
 
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
         }
-
     }
-
 }
 
 
