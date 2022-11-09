@@ -13,10 +13,11 @@ import java.nio.file.Paths;
 import java.sql.*;
 import java.sql.DriverManager;
 import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.ResultSet;
 import java.util.Properties;
 import java.util.Scanner;
+
+import static ddsi_seminario1.FuncionesSQL.addPedido;
+
 
 
 public class DDSI_seminario1 {
@@ -83,6 +84,41 @@ public class DDSI_seminario1 {
                 case '1':
                     break;
                 case '2':
+                    System.out.println("Ha elegido dar de alta un nuevo pedido");
+
+                    String fechaPedido;
+                    int codCliente, codPedido;
+
+                    System.out.println("\tIntroduzca el código del cliente");
+                    codCliente = scanner.nextInt();
+                    System.out.println("\tIntroduzca la fecha del pedido (Formato: x-x-x)");
+                    fechaPedido = scanner.nextLine();
+
+                    codPedido = addPedido(codCliente,fechaPedido);
+
+                    System.out.println("Opciones:");
+                    System.out.println("\t(1) Añadir detalles del producto");
+                    System.out.println("\t(2) Eliminar detalles del producto");
+                    System.out.println("\t(3) Cancelar pedido");
+                    System.out.println("\t(4) Finalizar pedido");
+                    char subOpcion = scanner.next().charAt(0);
+                    switch (subOpcion){
+                        case '1':
+                            //...
+                            //addDetallesPedido(codPedido);
+                            break;
+                        case '2':
+                            //deleteDetallesPedido(codPedido);
+                            break;
+                        case '3':
+                            //deletePedido(codPedido);
+                            break;
+                        case '4':
+                            //Duda, para hacer los cambios permanentes hace falta añadir detalles al pedido?
+                            //guardarCambios();
+                            break;
+                    }
+
                     break;
                 case '3':
                     break;
@@ -99,6 +135,7 @@ public class DDSI_seminario1 {
 //                if (numero ==1 || numero == 2 || numero == 3)
             //mostrar contenido bd
         }
+
     }
 }
 

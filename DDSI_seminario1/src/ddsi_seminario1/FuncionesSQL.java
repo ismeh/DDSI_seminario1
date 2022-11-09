@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class FuncionesSQL {
-
+    private static int contadorPedidos = 0;
 
     static void  SacaInfo(Connection conexion) throws SQLException {
         DatabaseMetaData metaDatos = conexion.getMetaData();
@@ -18,5 +18,14 @@ public class FuncionesSQL {
 
             System.out.println("Columna: " + nombreColumna + " tipo: " + tipoColumna);
         }
+    }
+
+    public static int addPedido(int codCliente, String fechaPedido){
+        int codPedido = 0;
+        //Gestión de codPedido
+
+        //Insertar datos en la tabla
+        
+        return codPedido;
     }
 }
