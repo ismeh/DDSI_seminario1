@@ -24,7 +24,7 @@ public class conexionBD {
         return conexion;
     }
 
-     public void cerrarConexion(){
+     static public void cerrarConexion(){
         try {
             conexion.close();
         } catch (SQLException ex) {
