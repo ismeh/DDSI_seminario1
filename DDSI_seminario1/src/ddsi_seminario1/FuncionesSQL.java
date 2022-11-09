@@ -17,6 +17,8 @@ public class FuncionesSQL {
         }
     }
 
+
+
     public static int addPedido(int codPedido, int codCliente, String fechaPedido) throws SQLException {
 
         //Insertar datos en la tabla
