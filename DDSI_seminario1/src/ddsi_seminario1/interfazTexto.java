@@ -35,6 +35,7 @@ public class interfazTexto {
                     consultaTabla(conexion, tabla);
                     break;
                 case '4':
+                    conexionBD.cerrarConexion();
                     break;
                 default:
                     System.out.println(ANSI_RED + "La tecla introducida no corresponde con ninguna opción válida. " +
@@ -52,11 +53,13 @@ public class interfazTexto {
 
     static void interfazAltaPedido(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ha elegido dar de alta un nuevo pedido");
+        System.out.println("\n\nHa elegido dar de alta un nuevo pedido");
 
         String fechaPedido;
         int codCliente, codPedido;
 
+        System.out.println("\tIntroduzca el código del pedido");
+        codPedido = scanner.nextInt();
         System.out.println("\tIntroduzca el código del cliente");
         codCliente = scanner.nextInt();
         System.out.println("\tIntroduzca la fecha del pedido (Formato: x-x-x)");
