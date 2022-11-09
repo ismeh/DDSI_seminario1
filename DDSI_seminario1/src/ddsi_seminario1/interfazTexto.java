@@ -5,13 +5,14 @@ import java.util.Scanner;
 
 
 import static ddsi_seminario1.FuncionesSQL.addPedido;
+import static ddsi_seminario1.FuncionesSQL.borradoYCreacion;
 
 public class interfazTexto {
 
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_RESET = "\u001B[0m";
 
-    static void eligeOpcion() {
+    static void eligeOpcion() throws SQLException {
         System.out.println("Bienvenido a SQL elija una opción para realizar:");
 
         char numero='0';
@@ -29,6 +30,7 @@ public class interfazTexto {
 
             switch (numero) {
                 case '1':
+                    borradoYCreacion();
                     break;
                 case '2':
                     interfazAltaPedido();
