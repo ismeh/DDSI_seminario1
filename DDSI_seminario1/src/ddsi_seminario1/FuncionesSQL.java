@@ -1,9 +1,6 @@
 package ddsi_seminario1;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class FuncionesSQL {
     private static int contadorPedidos = 0;
@@ -20,13 +17,16 @@ public class FuncionesSQL {
         }
     }
 
-    public static int addPedido(int codCliente, String fechaPedido){
-        int codPedido = 0;
-        //Gestión de codPedido
-
+    public static int addPedido(int codPedido, int codCliente, String fechaPedido) throws SQLException {
 
         //Insertar datos en la tabla
-        
+        PreparedStatement stmt = null;
+        stmt =  conexionBD.getConexion().prepareStatement("INSERT INTO PEDIDOS VALUES (?,?,?)");
+        stmt.setInt(1,codPedido);
+        stmt.setInt(2,codCliente);
+        stmt.setString(3,fechaPedido);
+        stmt.executeUpdate();
+
         return codPedido;
     }
 

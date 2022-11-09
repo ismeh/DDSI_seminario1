@@ -1,5 +1,6 @@
 package ddsi_seminario1;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 
@@ -35,6 +36,7 @@ public class interfazTexto {
                 case '3':
                     break;
                 case '4':
+                    conexionBD.cerrarConexion();
                     break;
                 default:
                     System.out.println(ANSI_RED + "La tecla introducida no corresponde con ninguna opción válida. " +
@@ -57,12 +59,18 @@ public class interfazTexto {
         String fechaPedido;
         int codCliente, codPedido;
 
+        System.out.println("\tIntroduzca el código del pedido");
+        codPedido = scanner.nextInt();
         System.out.println("\tIntroduzca el código del cliente");
         codCliente = scanner.nextInt();
         System.out.println("\tIntroduzca la fecha del pedido (Formato: x-x-x)");
         fechaPedido = scanner.nextLine();
 
-        codPedido = addPedido(codCliente,fechaPedido);
+        try {
+            codPedido = addPedido(codPedido,codCliente,fechaPedido);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         System.out.println("\nOpciones:");
         System.out.println("\t(1) Añadir detalles del producto");
