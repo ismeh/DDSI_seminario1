@@ -119,7 +119,7 @@ public class interfazTexto {
                 tabla = "PEDIDOS";
                 break;
             case '3':
-                tabla = "DETALLE-PEDIDOS";
+                tabla = "DETALLEPEDIDOS";
                 break;
             case '4':
                 break;

@@ -125,7 +125,7 @@ public class FuncionesSQL {
                                 r.getDate("FechaPedido"));
                         break;
 
-                    case "DETALLE-PEDIDO":
+                    case "DETALLEPEDIDOS":
                         System.out.println("\n" + r.getInt("Cpedido") + " | " + r.getInt("Cproducto") + "\n" +
                                 r.getInt("Cantidad"));
                         break;
