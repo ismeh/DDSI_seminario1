@@ -122,7 +122,7 @@ public class FuncionesSQL {
 
                     case "PEDIDOS":
                         System.out.println("\n" + r.getInt("Cpedido") + " | " + r.getInt("Ccliente") + "\n" +
-                                r.getDate("Fecha-pedido"));
+                                r.getDate("FechaPedido"));
                         break;
 
                     case "DETALLE-PEDIDO":
