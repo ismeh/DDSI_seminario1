@@ -61,7 +61,7 @@ public class interfazTexto {
 
     static void interfazAltaPedido() throws SQLException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\n\nHa elegido dar de alta un nuevo pedido");
+        System.out.println("\nHa elegido dar de alta un nuevo pedido");
 
         String fechaPedido;
         int codCliente, codPedido;
@@ -70,10 +70,10 @@ public class interfazTexto {
         codPedido = scanner.nextInt();
         System.out.println("\tIntroduzca el código del cliente");
         codCliente = scanner.nextInt();
-        System.out.println("\tIntroduzca la fecha del pedido (Formato: x-x-x)");
-        fechaPedido = scanner.nextLine();
+        System.out.println("\tIntroduzca la fecha del pedido (Formato: DD-MM-YYYY)");
+        fechaPedido = scanner.next();
 
-        codPedido = addPedido(codCliente,fechaPedido);
+        addPedido(codPedido, codCliente,fechaPedido);
 
         System.out.println("Opciones:");
         System.out.println("\t(1) Añadir detalles del producto");
