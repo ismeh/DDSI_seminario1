@@ -93,6 +93,20 @@ public class FuncionesSQL {
 
     }
 
+    public static void addDetallePedido(int codPedido, int Cproducto, int Cantidad) throws SQLException {
+
+        //Insertar datos en la tabla
+
+        PreparedStatement stmt = null;
+        stmt = conexionBD.getConexion().prepareStatement("INSERT INTO " + DETALLEPEDIDOS +" VALUES (?,?,?)");
+        stmt.setInt(1,codPedido);
+        stmt.setInt(2,Cproducto);
+        stmt.setInt(3,Cantidad);
+        stmt.executeUpdate();
+        stmt.close();
+
+    }
+
     static void addAllStock() throws SQLException {
         addStock(1,10);
         addStock(2,10);

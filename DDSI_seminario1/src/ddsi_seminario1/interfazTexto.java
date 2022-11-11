@@ -6,9 +6,7 @@ import java.util.Scanner;
 
 import static ddsi_seminario1.DDSI_seminario1.ANSI_RED;
 import static ddsi_seminario1.DDSI_seminario1.ANSI_RESET;
-import static ddsi_seminario1.FuncionesSQL.addPedido;
-import static ddsi_seminario1.FuncionesSQL.consultaTabla;
-import static ddsi_seminario1.FuncionesSQL.borradoYCreacion;
+import static ddsi_seminario1.FuncionesSQL.*;
 
 public class interfazTexto {
 
@@ -83,8 +81,13 @@ public class interfazTexto {
         char subOpcion = scanner.next().charAt(0);
         switch (subOpcion){
             case '1':
-                //...
-                //addDetallesPedido(codPedido);
+                int Cproducto, Cantidad;
+
+                System.out.println("\tIntroduzca el código del producto");
+                Cproducto = scanner.nextInt();
+                System.out.println("\tIntroduzca la cantidad del pedido");
+                Cantidad = scanner.nextInt();
+                addDetallePedido(codPedido, Cproducto, Cantidad);
                 break;
             case '2':
                 //deleteDetallesPedido(codPedido);
