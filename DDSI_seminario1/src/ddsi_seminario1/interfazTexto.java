@@ -68,8 +68,11 @@ public class interfazTexto {
         codPedido = scanner.nextInt();
         System.out.println("\tIntroduzca el código del cliente");
         codCliente = scanner.nextInt();
-        System.out.println("\tIntroduzca la fecha del pedido (Formato: DD-MM-YYYY)");
-        fechaPedido = scanner.next();
+
+        do{
+            System.out.println("\tIntroduzca una fecha válida para el pedido (Formato: DD-MM-YYYY)");
+            fechaPedido = scanner.next();
+        }while(fechaPedido.length() != 10 || fechaPedido.charAt(2) != '-' || fechaPedido.charAt(5) != '-');
 
         addPedido(codPedido, codCliente,fechaPedido);
 

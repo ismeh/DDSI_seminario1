@@ -28,6 +28,7 @@ public class DDSI_seminario1 {
     //Nombre usuario y password
     static String usuario = "x";
     static String password = "y";
+
     public static void main(String[] args) throws SQLException {
         //
         Properties properties = new Properties();
@@ -43,16 +44,17 @@ public class DDSI_seminario1 {
             throw new RuntimeException(e);
         }
 
-        conexionBD conexion = new conexionBD(url,usuario,password);
+        conexionBD conexion;
 
-            //FuncionesSQL funcionesSQL = new FuncionesSQL();
-
-            //int numero=1;
+        if( (conexion = new conexionBD(url,usuario,password)) != null ){
             System.out.println("Bienvenido a SQL elija una opción para realizar:");
 
             eligeOpcion();
 
             conexionBD.cerrarConexion();
+        }
+        else
+            System.out.println("Ha habido un error a la hora de conectarse a la base de datos. Por favor compruebe su red.");
     }
 }
 

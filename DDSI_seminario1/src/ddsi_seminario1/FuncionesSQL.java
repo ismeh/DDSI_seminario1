@@ -82,15 +82,16 @@ public class FuncionesSQL {
     }
 
     public static void addStock(int Cproducto, int cantidad) throws SQLException {
-
         //Insertar datos en la tabla
         PreparedStatement stmt = null;
+
         stmt =  conexionBD.getConexion().prepareStatement("INSERT INTO " + STOCK +" VALUES (?,?)");
+
         stmt.setInt(1,Cproducto);
         stmt.setInt(2,cantidad);
+
         stmt.executeUpdate();
         stmt.close();
-
     }
 
     public static void addDetallePedido(int codPedido, int Cproducto, int Cantidad) throws SQLException {
@@ -98,13 +99,15 @@ public class FuncionesSQL {
         //Insertar datos en la tabla
 
         PreparedStatement stmt = null;
+
         stmt = conexionBD.getConexion().prepareStatement("INSERT INTO " + DETALLEPEDIDOS +" VALUES (?,?,?)");
+
         stmt.setInt(1,codPedido);
         stmt.setInt(2,Cproducto);
         stmt.setInt(3,Cantidad);
+
         stmt.executeUpdate();
         stmt.close();
-
     }
 
     static void addAllStock() throws SQLException {
@@ -119,7 +122,6 @@ public class FuncionesSQL {
         addStock(8,20);
         addStock(9,20);
         addStock(10,15);
-
     }
 
     protected static void consultaTabla(Connection conexion, String tabla){
@@ -131,17 +133,18 @@ public class FuncionesSQL {
             while(r.next()){
                 switch (tabla){
                     case "STOCK":
-                        System.out.println("\n" + r.getInt("Cproducto") + " | " + r.getInt("Cantidad"));
+                        System.out.println("\nCproducto: " + r.getInt("Cproducto") + " | Cantidad: " +
+                                r.getInt("Cantidad"));
                         break;
 
                     case "PEDIDOS":
-                        System.out.println("\n" + r.getInt("Cpedido") + " | " + r.getInt("Ccliente") + "\n" +
-                                r.getDate("FechaPedido"));
+                        System.out.println("\nCpedido: " + r.getInt("Cpedido") + " | Ccliente: " +
+                                r.getInt("Ccliente") + " | FechaPedido: " + r.getDate("FechaPedido"));
                         break;
 
                     case "DETALLEPEDIDOS":
-                        System.out.println("\n" + r.getInt("Cpedido") + " | " + r.getInt("Cproducto") + "\n" +
-                                r.getInt("Cantidad"));
+                        System.out.println("\nCpedido: " + r.getInt("Cpedido") + " | Cproducto: " +
+                                r.getInt("Cproducto") + " | Cantidad:" + r.getInt("Cantidad"));
                         break;
 
                     default:
