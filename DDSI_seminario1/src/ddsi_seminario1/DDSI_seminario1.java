@@ -5,18 +5,9 @@
  */
 package ddsi_seminario1;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.*;
-import java.sql.DriverManager;
 import java.sql.Connection;
-import java.util.Properties;
-import java.util.Scanner;
+import java.sql.SQLException;
 
-import static ddsi_seminario1.FuncionesSQL.addPedido;
 import static ddsi_seminario1.interfazTexto.eligeOpcion;
 
 public class DDSI_seminario1 {

@@ -7,9 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FuncionesSQL {
-
-
-    private static int contadorPedidos = 0;
     private static String STOCK = "STOCK";
     private static String PEDIDOS = "PEDIDOS";
     private static String DETALLEPEDIDOS= "DETALLEPEDIDOS";
@@ -67,10 +64,7 @@ public class FuncionesSQL {
     }
 
     public static int addPedido(int codPedido, int codCliente, String fechaPedido) throws SQLException {
-        //Gestión de codPedido
-
         //Insertar datos en la tabla
-        
         PreparedStatement stmt = null;
         stmt =  conexionBD.getConexion().prepareStatement("INSERT INTO "+ PEDIDOS +" VALUES (?,?,?)");
         stmt.setInt(1,codPedido);

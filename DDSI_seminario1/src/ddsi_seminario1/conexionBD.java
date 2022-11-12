@@ -22,6 +22,7 @@ public class conexionBD {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conexion = DriverManager.getConnection(url, usuario, password);
+            conexion.setAutoCommit(false);
         }  catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
         }

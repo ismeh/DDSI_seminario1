@@ -73,6 +73,7 @@ public class interfazTexto {
             } catch (SQLException e) {
                 int codigoerror = e.getErrorCode();
 
+
                 if(codigoerror == 1830)
                     System.out.println("\nFecha incorrecta.");
                 else if (codigoerror == 1)
