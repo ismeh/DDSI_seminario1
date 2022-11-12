@@ -48,9 +48,6 @@ public class interfazTexto {
                     System.out.println(ANSI_RESET);
                     break;
             }
-
-//                if (numero ==1 || numero == 2 || numero == 3)
-            //mostrar contenido bd
         }
     }
 
@@ -88,33 +85,70 @@ public class interfazTexto {
             }
         }while(!valido);
 
-        System.out.println("Opciones:");
-        System.out.println("\t(1) Añadir detalles del producto");
-        System.out.println("\t(2) Eliminar detalles del producto");
-        System.out.println("\t(3) Cancelar pedido");
-        System.out.println("\t(4) Finalizar pedido");
-        char subOpcion = scanner.next().charAt(0);
-        switch (subOpcion){
-            case '1':
-                int Cproducto, Cantidad;
+        char subOpcion;
+        boolean continuar = true;
 
-                System.out.println("\tIntroduzca el código del producto");
-                Cproducto = scanner.nextInt();
-                System.out.println("\tIntroduzca la cantidad del pedido");
-                Cantidad = scanner.nextInt();
-                addDetallePedido(codPedido, Cproducto, Cantidad);
-                break;
-            case '2':
-                //deleteDetallesPedido(codPedido);
-                break;
-            case '3':
-                //deletePedido(codPedido);
-                break;
-            case '4':
-                //Duda, para hacer los cambios permanentes hace falta añadir detalles al pedido?
-                //guardarCambios();
-                break;
-        }
+        do {
+            System.out.println("Opciones:");
+            System.out.println("\t(1) Añadir detalles del producto");
+            System.out.println("\t(2) Eliminar detalles del producto");
+            System.out.println("\t(3) Cancelar pedido");
+            System.out.println("\t(4) Finalizar pedido");
+            subOpcion = scanner.next().charAt(0);
+            switch (subOpcion) {
+                case '1':
+                    int Cproducto, Cantidad;
+                    boolean valid = false;
+
+                    do {
+                        try {
+                            System.out.println("\tIntroduzca el código del producto");
+                            Cproducto = scanner.nextInt();
+                            System.out.println("\tIntroduzca la cantidad del pedido");
+                            Cantidad = scanner.nextInt();
+                            addDetallePedido(codPedido, Cproducto, Cantidad);
+
+                            consultaTabla(conexionBD.getConexion(), "DETALLEPEDIDOS");
+                            valid = true;
+                        } catch (SQLException e) {
+                            int cod_error = e.getErrorCode();
+                            if (cod_error == 2291)
+                                System.out.println("\nEl código del producto no está disponible en el stock. Por favor introduzca otro código: ");
+                            else if (cod_error == 2290)
+                                System.out.println("\nLa cantidad introducida es ínvalida, debe ser superior a 0. Por favor introduzca otra cantidad correcta: ");
+                            else
+                                System.out.println(e.getCause().toString());
+
+                            valid = false;
+                        }
+                    } while (!valid);
+
+                    break;
+                case '2':
+                    try {
+                        deleteDetallesPedido(conexionBD.getConexion(), codPedido);
+                        consultaTabla(conexionBD.getConexion(), "DETALLEPEDIDOS");
+                    }catch (SQLException e){
+                        System.out.println(e.toString());
+                    }
+                    break;
+                case '3':
+                    try {
+                        deletePedido(conexionBD.getConexion(), codPedido);
+                        consultaTabla(conexionBD.getConexion(), "DETALLEPEDIDOS");
+                        consultaTabla(conexionBD.getConexion(), "PEDIDOS");
+                        continuar = false;
+                    }catch (SQLException e){
+                        System.out.println(e.toString());
+                    }
+                    break;
+                case '4':
+                    guardarCambios(conexionBD.getConexion());
+                    continuar = false;
+                    break;
+            }
+
+        }while(continuar);
     }
 
     static String interfazElijaTabla(){

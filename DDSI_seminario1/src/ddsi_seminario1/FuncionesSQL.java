@@ -50,7 +50,7 @@ public class FuncionesSQL {
         String creacionTablaPedidos = "CREATE TABLE " + PEDIDOS +" (CPedido int PRIMARY KEY NOT NULL," +
                                     "Ccliente int, FechaPedido DATE)";
         String creacionTablaDetallePedidos = "CREATE TABLE "+  DETALLEPEDIDOS+" (CPedido int," +
-                "Cproducto int, Cantidad int, PRIMARY KEY (Cpedido,CProducto), FOREIGN KEY (CProducto) "+
+                "Cproducto int, Cantidad int CHECK (Cantidad > 0), PRIMARY KEY (Cpedido,CProducto), FOREIGN KEY (CProducto) "+
                 "REFERENCES STOCK(Cproducto), FOREIGN KEY (CPedido) REFERENCES PEDIDOS(Cpedido)) ";
         crearTabla(conexion, creacionTablaStock);
         crearTabla(conexion, creacionTablaPedidos);
@@ -168,4 +168,34 @@ public class FuncionesSQL {
         }
         return null;
     }
+
+    static void deleteDetallesPedido(Connection conexion, int codPedido) throws SQLException{
+        PreparedStatement stmt = null;
+        stmt = conexion.prepareStatement("DELETE FROM DETALLEPEDIDOS WHERE CPedido = " + codPedido);
+        stmt.execute();
+        stmt.close();
+        stmt = null;
+        System.out.println( "Detalles de " + codPedido + " --> ELIMINADOS");
+    }
+
+    static void deletePedido(Connection conexion, int codPedido) throws SQLException{
+        PreparedStatement stmt = null;
+        deleteDetallesPedido(conexion, codPedido);
+        stmt = conexion.prepareStatement("DELETE FROM PEDIDOS WHERE CPedido = " + codPedido);
+        stmt.execute();
+        stmt.close();
+        stmt = null;
+        System.out.println( "Pedido " + codPedido + " --> ELIMINADO");
+    }
+
+    static void guardarCambios(Connection conexion) throws SQLException{
+        PreparedStatement stmt = null;
+        stmt = conexion.prepareStatement("COMMIT");
+        stmt.execute();
+        stmt.close();
+        stmt = null;
+        System.out.println( "Cambios realizados guardados con éxito");
+    }
+
+
 }
