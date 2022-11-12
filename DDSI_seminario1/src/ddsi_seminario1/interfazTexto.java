@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import static ddsi_seminario1.DDSI_seminario1.ANSI_RED;
-import static ddsi_seminario1.DDSI_seminario1.ANSI_RESET;
 import static ddsi_seminario1.FuncionesSQL.*;
 
 public class interfazTexto {
