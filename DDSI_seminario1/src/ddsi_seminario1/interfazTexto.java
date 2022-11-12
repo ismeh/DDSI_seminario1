@@ -54,7 +54,6 @@ public class interfazTexto {
 //                if (numero ==1 || numero == 2 || numero == 3)
             //mostrar contenido bd
         }
-
     }
 
     static void interfazAltaPedido() throws SQLException {
@@ -62,19 +61,33 @@ public class interfazTexto {
         System.out.println("\nHa elegido dar de alta un nuevo pedido");
 
         String fechaPedido;
-        int codCliente, codPedido;
+        int codCliente, codPedido = 0;
+        boolean valido = false;
 
-        System.out.println("\tIntroduzca el código del pedido");
-        codPedido = scanner.nextInt();
-        System.out.println("\tIntroduzca el código del cliente");
-        codCliente = scanner.nextInt();
+        do {
+            try {
+                System.out.println("\tIntroduzca el código del pedido");
+                codPedido = scanner.nextInt();
+                System.out.println("\tIntroduzca el código del cliente");
+                codCliente = scanner.nextInt();
+                System.out.println("\tIntroduzca una fecha válida para el pedido (Formato: DD-MM-YYYY)");
+                fechaPedido = scanner.next();
 
-        do{
-            System.out.println("\tIntroduzca una fecha válida para el pedido (Formato: DD-MM-YYYY)");
-            fechaPedido = scanner.next();
-        }while(fechaPedido.length() != 10 || fechaPedido.charAt(2) != '-' || fechaPedido.charAt(5) != '-');
+                addPedido(codPedido, codCliente, fechaPedido);
+                valido = true;
+            } catch (SQLException e) {
+                System.out.println(e.getCause().toString());
+                int codigoerror = e.getErrorCode();
 
-        addPedido(codPedido, codCliente,fechaPedido);
+                if(codigoerror == 1830)
+                    System.out.println("\nFecha incorrecta.");
+                else if (codigoerror == 1)
+                    System.out.println("\nHas introducido un código que ya existe. Por favor, introduce otro código.");
+
+                System.out.println("\nIntroduzca datos válidos para el pedido.");
+                valido = false;
+            }
+        }while(!valido);
 
         System.out.println("Opciones:");
         System.out.println("\t(1) Añadir detalles del producto");

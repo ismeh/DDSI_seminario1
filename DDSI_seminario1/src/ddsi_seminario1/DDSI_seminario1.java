@@ -46,7 +46,7 @@ public class DDSI_seminario1 {
 
         conexionBD conexion;
 
-        if( (conexion = new conexionBD(url,usuario,password)) != null ){
+        if( (conexion = new conexionBD(url, usuario, password)) != null ){
             System.out.println("Bienvenido a SQL elija una opción para realizar:");
 
             eligeOpcion();
