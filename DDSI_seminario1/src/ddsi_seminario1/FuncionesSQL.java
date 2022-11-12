@@ -128,7 +128,7 @@ public class FuncionesSQL {
         ResultSet r = buscar("select * from " + tabla, conexion);
 
         try{
-            System.out.println("\nTODOS LOS REGISTROS DE LA TABLA " + tabla);
+            System.out.println("\nTODOS LOS REGISTROS DE LA TABLA " + tabla + ".\n");
 
             while(r.next()){
                 switch (tabla){
@@ -152,8 +152,10 @@ public class FuncionesSQL {
                         break;
                 }
             }
+
         }catch(SQLException ex){
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("\n¡No hemos podido acceder a los datos de la tabla! Comprueba que haya datos en ésta y que" +
+                    " estén introducidos correctamente.");
         }
     }
 

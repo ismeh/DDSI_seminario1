@@ -74,13 +74,14 @@ public class interfazTexto {
                 addPedido(codPedido, codCliente, fechaPedido);
                 valido = true;
             } catch (SQLException e) {
-                System.out.println(e.getCause().toString());
                 int codigoerror = e.getErrorCode();
 
                 if(codigoerror == 1830)
                     System.out.println("\nFecha incorrecta.");
                 else if (codigoerror == 1)
                     System.out.println("\nHas introducido un código que ya existe. Por favor, introduce otro código.");
+                else
+                    System.out.println(e.getCause().toString());
 
                 System.out.println("\nIntroduzca datos válidos para el pedido.");
                 valido = false;
@@ -147,7 +148,6 @@ public class interfazTexto {
                 System.out.println(ANSI_RESET);
                 break;
         }
-
         return tabla;
     }
 }
