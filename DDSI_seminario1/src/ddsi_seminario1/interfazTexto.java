@@ -56,6 +56,11 @@ public class interfazTexto {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nHa elegido dar de alta un nuevo pedido");
 
+        Connection conexion = conexionBD.getConexion();
+        conexion.setAutoCommit(false);
+        Savepoint prePedido = null;
+        prePedido = conexion.setSavepoint("pruebaPedido");
+
         String fechaPedido;
         int codCliente, codPedido = 0;
         boolean valido = false;
@@ -90,6 +95,10 @@ public class interfazTexto {
         char subOpcion;
         boolean continuar = true;
 
+
+        Savepoint preDetalles = null;
+        preDetalles = conexion.setSavepoint("prueba");
+
         do {
             System.out.println("Opciones:");
             System.out.println("\t(1) Añadir detalles del producto");
@@ -97,10 +106,6 @@ public class interfazTexto {
             System.out.println("\t(3) Cancelar pedido");
             System.out.println("\t(4) Finalizar pedido");
             subOpcion = scanner.next().charAt(0);
-            Connection conexion = conexionBD.getConexion();
-            conexion.setAutoCommit(false);
-            conexion.commit();
-            Savepoint preDetalles = conexion.setSavepoint();
 
             switch (subOpcion) {
                 case '1':
@@ -133,27 +138,25 @@ public class interfazTexto {
                     break;
                 case '2':
                     try {
-                        //deleteDetallesPedido(conexionBD.getConexion(), preDetalles, codPedido);
                         conexion.rollback(preDetalles);
-                        conexion.commit();
                         System.out.println( "Detalles de " + codPedido + " --> ELIMINADOS");
-                        consultaTabla(conexionBD.getConexion(), "DETALLEPEDIDOS");
+                        consultaTabla(conexion, "DETALLEPEDIDOS");
                     }catch (SQLException e){
                         System.out.println(e.toString());
                     }
                     break;
                 case '3':
                     try {
-                        deletePedido(conexionBD.getConexion(), codPedido);
-                        consultaTabla(conexionBD.getConexion(), "DETALLEPEDIDOS");
-                        consultaTabla(conexionBD.getConexion(), "PEDIDOS");
+                        conexion.rollback(prePedido);
+                        consultaTabla(conexion, "DETALLEPEDIDOS");
+                        consultaTabla(conexion, "PEDIDOS");
                         continuar = false;
                     }catch (SQLException e){
                         System.out.println(e.toString());
                     }
                     break;
                 case '4':
-                    guardarCambios(conexionBD.getConexion());
+                    guardarCambios(conexion);
                     continuar = false;
                     break;
             }
