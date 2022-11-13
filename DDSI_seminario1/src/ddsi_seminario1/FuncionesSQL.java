@@ -128,17 +128,17 @@ public class FuncionesSQL {
             while(r.next()){
                 switch (tabla){
                     case "STOCK":
-                        System.out.println("\nCproducto" + " | Cantidad" + r.getInt("Cproducto") +
+                        System.out.println("\nCproducto" + " | Cantidad\n" + r.getInt("Cproducto") +
                                 " | " + r.getInt("Cantidad"));
                         break;
 
                     case "PEDIDOS":
-                        System.out.println("\nCpedido" + " | Ccliente" + " | FechaPedido" + r.getInt("Cpedido") +
+                        System.out.println("\nCpedido" + " | Ccliente" + " | FechaPedido\n" + r.getInt("Cpedido") +
                                 " | " + r.getInt("Ccliente") + " | " + r.getDate("FechaPedido"));
                         break;
 
                     case "DETALLEPEDIDOS":
-                        System.out.println("\nCpedido" + " | Cproducto" + " | Cantidad" + r.getInt("Cpedido") +
+                        System.out.println("\nCpedido" + " | Cproducto" + " | Cantidad\n" + r.getInt("Cpedido") +
                                 " | " + r.getInt("Cproducto") + " | " + r.getInt("Cantidad"));
                         break;
 
