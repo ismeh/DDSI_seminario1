@@ -165,6 +165,8 @@ public class FuncionesSQL {
                     case "DETALLEPEDIDOS":
                         str = String.format("%10d %10d %10d",r.getInt("Cpedido"), r.getInt("Cproducto"),
                                 r.getInt("Cantidad"));
+                        System.out.println(str + "  "+ r.getDate("FechaPedido"));
+
                         break;
 
                     default:
