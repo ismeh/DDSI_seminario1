@@ -163,22 +163,29 @@ public class FuncionesSQL {
         return null;
     }
 
-    static void deleteDetallesPedido(Connection conexion, int codPedido) throws SQLException{
+//    static void deleteDetallesPedido(Connection conexion, Savepoint preDetalles, int codPedido) throws SQLException{
+
+//        conexion.rollback(preDetalles);
+        /*
         PreparedStatement stmt = null;
         stmt = conexion.prepareStatement("DELETE FROM DETALLEPEDIDOS WHERE CPedido = " + codPedido);
         stmt.execute();
         stmt.close();
         stmt = null;
-        System.out.println( "Detalles de " + codPedido + " --> ELIMINADOS");
-    }
+         */
+//        System.out.println( "Detalles de " + codPedido + " --> ELIMINADOS");
+//    }
 
     static void deletePedido(Connection conexion, int codPedido) throws SQLException{
+        /*
         PreparedStatement stmt = null;
         deleteDetallesPedido(conexion, codPedido);
         stmt = conexion.prepareStatement("DELETE FROM PEDIDOS WHERE CPedido = " + codPedido);
         stmt.execute();
         stmt.close();
         stmt = null;
+
+         */
         System.out.println( "Pedido " + codPedido + " --> ELIMINADO");
     }
 

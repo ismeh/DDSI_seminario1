@@ -1,8 +1,9 @@
 package ddsi_seminario1;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+//import java.sql.Connection;
+//import java.sql.SQLException;
 import java.util.Scanner;
+import java.sql.*;
 
 import static ddsi_seminario1.FuncionesSQL.*;
 
@@ -96,6 +97,11 @@ public class interfazTexto {
             System.out.println("\t(3) Cancelar pedido");
             System.out.println("\t(4) Finalizar pedido");
             subOpcion = scanner.next().charAt(0);
+            Connection conexion = conexionBD.getConexion();
+            conexion.setAutoCommit(false);
+            conexion.commit();
+            Savepoint preDetalles = conexion.setSavepoint();
+
             switch (subOpcion) {
                 case '1':
                     int Cproducto, Cantidad;
@@ -109,7 +115,7 @@ public class interfazTexto {
                             Cantidad = scanner.nextInt();
                             addDetallePedido(codPedido, Cproducto, Cantidad);
 
-                            consultaTabla(conexionBD.getConexion(), "DETALLEPEDIDOS");
+                            consultaTabla(conexion, "DETALLEPEDIDOS");
                             valid = true;
                         } catch (SQLException e) {
                             int cod_error = e.getErrorCode();
@@ -127,7 +133,10 @@ public class interfazTexto {
                     break;
                 case '2':
                     try {
-                        deleteDetallesPedido(conexionBD.getConexion(), codPedido);
+                        //deleteDetallesPedido(conexionBD.getConexion(), preDetalles, codPedido);
+                        conexion.rollback(preDetalles);
+                        conexion.commit();
+                        System.out.println( "Detalles de " + codPedido + " --> ELIMINADOS");
                         consultaTabla(conexionBD.getConexion(), "DETALLEPEDIDOS");
                     }catch (SQLException e){
                         System.out.println(e.toString());
