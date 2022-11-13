@@ -5,6 +5,7 @@ import com.sun.tools.javac.Main;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Formatter;
 
 public class FuncionesSQL {
     private static String STOCK = "STOCK";
@@ -124,22 +125,30 @@ public class FuncionesSQL {
 
         try{
             System.out.println("\nTODOS LOS REGISTROS DE LA TABLA " + tabla + ".");
+            Formatter f = new Formatter();
 
             while(r.next()){
                 switch (tabla){
                     case "STOCK":
-                        System.out.println("\nCproducto" + "\t\t\t\t | Cantidad\n" + r.getInt("Cproducto") +
-                                "\t\t\t\t | " + r.getInt("Cantidad"));
+                        System.out.println(f.format("%10d", "\nCproducto" + "%10d Cantidad\n"));
+                        f = new Formatter();
+                        System.out.println(f.format("%10d", r.getInt("Cproducto") + "%10d" + r.getInt("Cantidad")));
                         break;
 
                     case "PEDIDOS":
-                        System.out.println("\nCpedido" + "\t\t\t\t | Ccliente" + "\t\t\t\t | FechaPedido\n" + r.getInt("Cpedido") +
-                                " | " + r.getInt("Ccliente") + "\t\t\t\t | " + r.getDate("FechaPedido"));
+                        f = new Formatter();
+                        System.out.println(f.format("%10d", "\nCpedido" + "%10d Ccliente" + "%10d FechaPedido"));
+                        f = new Formatter();
+                        System.out.println(f.format("%10d", r.getInt("Cpedido") + "%10d" + r.getInt("Ccliente")
+                                + "%10d" + r.getDate("FechaPedido")));
                         break;
 
                     case "DETALLEPEDIDOS":
-                        System.out.println("\nCpedido" + "\t\t\t\t | Cproducto" + "\t\t\t\t | Cantidad\n" + r.getInt("Cpedido") +
-                                "\t\t\t\t | " + r.getInt("Cproducto") + "\t\t\t\t | " + r.getInt("Cantidad"));
+                        f = new Formatter();
+                        System.out.println(f.format("%10d", "\nCpedido" + "%10d Cproducto" + "%10d Cantidad"));
+                        f = new Formatter();
+                        System.out.println(f.format("%10d", r.getInt("Cpedido") + "%10d" + r.getInt("Cproducto")
+                                + "%10d" + r.getInt("Cantidad")));
                         break;
 
                     default:
@@ -147,7 +156,6 @@ public class FuncionesSQL {
                         break;
                 }
             }
-
         }catch(SQLException ex){
             System.out.println("\n¡No hemos podido acceder a los datos de la tabla! Comprueba que haya datos en ésta y que" +
                     " estén introducidos correctamente.");
