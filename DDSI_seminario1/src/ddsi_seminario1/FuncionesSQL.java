@@ -41,7 +41,6 @@ public class FuncionesSQL {
         System.out.println( nombreTabla +" table --> ELIMINADA");
     }
 
-
     static void creacion(Connection conexion) throws SQLException {
         String creacionTablaStock= "CREATE TABLE " + STOCK + " (Cproducto int PRIMARY KEY NOT NULL,"+
                                     " Cantidad int)";
@@ -55,7 +54,6 @@ public class FuncionesSQL {
         crearTabla(conexion, creacionTablaDetallePedidos);
 
         addAllStock();
-
     }
     static void crearTabla(Connection conexion, String creacionTabla) throws SQLException {
         PreparedStatement stmt = null;
@@ -120,7 +118,6 @@ public class FuncionesSQL {
     }
 
     protected static void consultaTabla(Connection conexion, String tabla){
-        ResultSet r = buscar("select * from " + tabla, conexion);
         String str;
         try{
             System.out.println("\nTODOS LOS REGISTROS DE LA TABLA " + tabla + ".");
@@ -147,7 +144,7 @@ public class FuncionesSQL {
                     break;
             }
 
-
+            ResultSet r = buscar("select * from " + tabla, conexion);
             while(r.next()){
                 switch (tabla){
                     case "STOCK":
@@ -163,14 +160,14 @@ public class FuncionesSQL {
                         break;
 
                     case "DETALLEPEDIDOS":
-                        str = String.format("%10d %10d %10d",r.getInt("Cpedido"), r.getInt("Cproducto"),
+                        str = String.format("%10d %10d %10d", r.getInt("Cpedido"), r.getInt("Cproducto"),
                                 r.getInt("Cantidad"));
-                        System.out.println(str + "  "+ r.getDate("FechaPedido"));
+                        System.out.println(str);
 
                         break;
 
                     default:
-//                        System.out.println("Error en el nombre de la tabla.");
+                            System.out.println("Error en el nombre de la tabla.");
                         break;
                 }
             }
