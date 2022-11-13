@@ -121,29 +121,54 @@ public class FuncionesSQL {
 
     protected static void consultaTabla(Connection conexion, String tabla){
         ResultSet r = buscar("select * from " + tabla, conexion);
-
+        String str;
         try{
             System.out.println("\nTODOS LOS REGISTROS DE LA TABLA " + tabla + ".");
+            switch (tabla){
+                case "STOCK":
+                    str= String.format("\n%10s %10s", "Cproducto","Cantidad");
+                    System.out.println(str);
+
+                    break;
+
+                case "PEDIDOS":
+//                    System.o
+                    str = String.format("\n%10s %10s %10s", "Cpedido","Ccliente", "FechaPedido");
+                    System.out.println(str);
+                    break;
+
+                case "DETALLEPEDIDOS":
+                    str=String.format("\n%10s %10s %10s", "Cpedido", "Cproducto", "Cantidad");
+                    System.out.println(str);
+                    break;
+
+                default:
+                    System.out.println("Error en el nombre de la tabla.");
+                    break;
+            }
+
 
             while(r.next()){
                 switch (tabla){
                     case "STOCK":
-                        System.out.println("\nCproducto" + " | Cantidad\n" + r.getInt("Cproducto") +
-                                " | " + r.getInt("Cantidad"));
+
+                        str = String.format("%10d %10d", r.getInt("Cproducto"), r.getInt("Cantidad"));
+                        System.out.println(str);
+
                         break;
 
                     case "PEDIDOS":
-                        System.out.println("\nCpedido" + " | Ccliente" + " | FechaPedido\n" + r.getInt("Cpedido") +
-                                " | " + r.getInt("Ccliente") + " | " + r.getDate("FechaPedido"));
+                        str = String.format("%10d %10d", r.getInt("Cpedido"), r.getInt("Ccliente"));
+                        System.out.println(str + "  "+ r.getDate("FechaPedido"));
                         break;
 
                     case "DETALLEPEDIDOS":
-                        System.out.println("\nCpedido" + " | Cproducto" + " | Cantidad\n" + r.getInt("Cpedido") +
-                                " | " + r.getInt("Cproducto") + " | " + r.getInt("Cantidad"));
+                        str = String.format("%10d %10d %10d",r.getInt("Cpedido"), r.getInt("Cproducto"),
+                                r.getInt("Cantidad"));
                         break;
 
                     default:
-                        System.out.println("Error en el nombre de la tabla.");
+//                        System.out.println("Error en el nombre de la tabla.");
                         break;
                 }
             }
