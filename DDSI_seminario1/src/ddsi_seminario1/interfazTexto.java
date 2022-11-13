@@ -125,9 +125,11 @@ public class interfazTexto {
                         } catch (SQLException e) {
                             int cod_error = e.getErrorCode();
                             if (cod_error == 2291)
-                                System.out.println("\nEl código del producto no está disponible en el stock. Por favor introduzca otro código: ");
+                                System.out.println("\nEl código del producto no está disponible en el stock." +
+                                        " Por favor introduzca otro código: ");
                             else if (cod_error == 2290)
-                                System.out.println("\nLa cantidad introducida es ínvalida, debe ser superior a 0. Por favor introduzca otra cantidad correcta: ");
+                                System.out.println("\nLa cantidad introducida es ínválida, debe ser superior a 0." +
+                                        " Por favor introduzca otra cantidad correcta: ");
                             else
                                 System.out.println(e.getCause().toString());
 

@@ -123,23 +123,23 @@ public class FuncionesSQL {
         ResultSet r = buscar("select * from " + tabla, conexion);
 
         try{
-            System.out.println("\nTODOS LOS REGISTROS DE LA TABLA " + tabla + ".\n");
+            System.out.println("\nTODOS LOS REGISTROS DE LA TABLA " + tabla + ".");
 
             while(r.next()){
                 switch (tabla){
                     case "STOCK":
-                        System.out.println("\nCproducto: " + r.getInt("Cproducto") + " | Cantidad: " +
-                                r.getInt("Cantidad"));
+                        System.out.println("\nCproducto" + " | Cantidad\n" + r.getInt("Cproducto") +
+                                " | " + r.getInt("Cantidad"));
                         break;
 
                     case "PEDIDOS":
-                        System.out.println("\nCpedido: " + r.getInt("Cpedido") + " | Ccliente: " +
-                                r.getInt("Ccliente") + " | FechaPedido: " + r.getDate("FechaPedido"));
+                        System.out.println("\nCpedido" + " | Ccliente" + " | FechaPedido\n" + r.getInt("Cpedido") +
+                                " | " + r.getInt("Ccliente") + r.getDate("FechaPedido"));
                         break;
 
                     case "DETALLEPEDIDOS":
-                        System.out.println("\nCpedido: " + r.getInt("Cpedido") + " | Cproducto: " +
-                                r.getInt("Cproducto") + " | Cantidad:" + r.getInt("Cantidad"));
+                        System.out.println("\nCpedido" + " | Cproducto" + " | Cantidad\n" + r.getInt("Cpedido") +
+                                " | " + r.getInt("Cproducto") + " | " + r.getInt("Cantidad"));
                         break;
 
                     default:
@@ -164,8 +164,6 @@ public class FuncionesSQL {
         return null;
     }
 
-
-
     static void guardarCambios(Connection conexion) throws SQLException{
         PreparedStatement stmt = null;
         stmt = conexion.prepareStatement("COMMIT");
@@ -174,6 +172,4 @@ public class FuncionesSQL {
         stmt = null;
         System.out.println( "Cambios realizados guardados con éxito");
     }
-
-
 }
