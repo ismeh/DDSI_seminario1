@@ -58,8 +58,7 @@ public class interfazTexto {
 
         Connection conexion = conexionBD.getConexion();
         conexion.setAutoCommit(false);
-        Savepoint prePedido = null;
-        prePedido = conexion.setSavepoint("pruebaPedido");
+        Savepoint prePedido = conexion.setSavepoint();
 
         String fechaPedido;
         int codCliente, codPedido = 0;
@@ -95,9 +94,7 @@ public class interfazTexto {
         char subOpcion;
         boolean continuar = true;
 
-
-        Savepoint preDetalles = null;
-        preDetalles = conexion.setSavepoint("prueba");
+        Savepoint preDetalles = conexion.setSavepoint();
 
         do {
             System.out.println("Opciones:");
@@ -162,7 +159,6 @@ public class interfazTexto {
                     continuar = false;
                     break;
             }
-
         }while(continuar);
     }
 
