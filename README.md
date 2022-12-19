@@ -1,5 +1,11 @@
 # DDSI_seminario1
 
+## Contenido
+- Conexión a SGBD desde un lenguaje de programación de propósito general (JAVA)
+- Control de transacciones en Oracle
+
+
+## Info
 Para conexion tenemos que hacer:
     - Descargar Java (.jar) en nuestro ordenador y ponerlo en un sitio que sepamos dónde está (guardar directorio de descarga)
     - Ir a File > Project Structure > SDK  (en intellij idea)
